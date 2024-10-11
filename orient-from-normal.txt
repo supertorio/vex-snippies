@@ -1,0 +1,12 @@
+// Point Wrangle
+vector nN = normalize(v@N);
+v@up = {0,1,0};
+p@orient = quaternion(maketransform(nN, @up));
+
+
+// Alternatively - detail wrangle where you are manually creating points
+vector normPos = normalize(set(pos.x, 0, pos.z));
+vector up = {0,1,0};
+
+setpointattrib(0, "N", npnt, normPos, "set");
+setpointattrib(0, "orient", npnt, quaternion(maketransform(normPos, up)), "set");

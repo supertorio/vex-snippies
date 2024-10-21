@@ -1,0 +1,23 @@
+// Place in a detail wrangle. Source curve into input 1
+
+int curve = addprim(0, "polyline");
+float count = chi("Number_Points");
+float arclen = primintrinsic(1, "measuredperimeter", 0);
+
+float total_scale = 0.f;
+for (float i=0; i < count; i++) {
+  total_scale += chramp("Point_Distribution", i/count);
+}
+
+float scale = 1.f/total_scale;
+f@scale = scale;
+
+float current_u = 0.f;
+
+for (float i=0; i<count; i++) {
+  float pscale = chramp("Point_Distribution", i/count) * scale;
+  int pt = addpoint(0, vector(primuv(1, "P", 0, current_u)));
+  setpointattrib(0, "curveu", pt, current_u);
+  addvertex(0, curve, pt);
+  current_u += pscale;
+}

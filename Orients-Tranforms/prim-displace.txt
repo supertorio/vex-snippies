@@ -1,0 +1,24 @@
+// Define values
+float seed = chf("Seed");
+float min = chf("Min");
+float max = chf("Max");
+
+// Get the points belonging to this primitive
+int points[] = primpoints(0, @primnum);
+
+// Iterate over each point in the primitive
+foreach(int pt; points) {
+    // Create a random height using the primitive number plus the seed
+    float randomHeight = rand(@primnum + seed);
+    
+    @Cd = fit01(randomHeight, 0.4, 0.6);
+    
+    // set the range for randomHeight
+    randomHeight = fit01(randomHeight, min, max);
+    
+    // Get the current position of the point
+    vector currentPos = point(0, "P", pt);
+    
+    currentPos.y += randomHeight;
+    setpointattrib(0, "P", pt, currentPos, "set");
+}

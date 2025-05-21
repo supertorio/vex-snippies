@@ -1,0 +1,5 @@
+// Gets the texture resolution from an imported texture file
+string path = chs("path");
+vector res = 0;
+teximport(path, "texture:resolution", res);
+printf("Texture resolution: %g x %g\n", res.x, res.y);
